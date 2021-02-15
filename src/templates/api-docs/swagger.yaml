@@ -1,0 +1,227 @@
+swagger: '2.0'
+info:
+  version: '1.0'
+  title: backend-limehome
+  contact: {}
+basePath: /v1
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+
+  /hotels:
+    get:
+      summary: get hotels
+      tags:
+        - hotels
+      operationId: /v1/hotels
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: coordinates
+          in: query
+          type: string
+          description: 'Example: 48.130323,11.576362'
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: ''
+        - name: page
+          in: query
+          type: integer
+          format: int32
+          description: ''
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/hotelsResponse"
+        400:
+          description: 'Bad Request'
+          headers: {}
+
+  /bookings:
+    get:
+      summary: get bookings
+      tags:
+        - bookings
+      operationId: /v1/bookings
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: pageSize
+          in: query
+          type: integer
+          format: int32
+          description: ''
+        - name: page
+          in: query
+          type: integer
+          format: int32
+          description: ''
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/bookingsResponse"
+        400:
+          description: 'Bad Request'
+          headers: {}
+    post:
+      summary: create new booking
+      tags:
+        - bookings
+      operationId: /v1/bookingscreate
+      deprecated: false
+      produces:
+        - application/json
+      parameters:
+        - name: Body
+          in: body
+          required: true
+          description: ''
+          schema:
+            $ref: '#/definitions/bookingsCreateRequest'
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/bookingsResponse"
+        400:
+          description: 'Bad Request'
+          headers: {}
+
+securityDefinitions:
+  ApiKeyAuth:        # arbitrary name for the security scheme
+    type: apiKey
+    in: header       # can be "header", "query" or "cookie"
+    name: jwt  # name of the header, query parameter or cookie
+security:
+  - ApiKeyAuth: []     # use the same name as under securitySchemes
+
+
+definitions:
+  bookingsResponse:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+        example: "602a336c4d06d36f886c1371"
+      authorEmail:
+        type: "string"
+        example: "test@test.test"
+      name:
+        type: "string"
+        example: "Hotel test"
+      fromDate:
+        type: "string"
+        format: "date-time"
+      toDate:
+        type: "string"
+        format: "date-time"
+      hotelId:
+        type: "string"
+        example: "here:pds:place:191srg0t-38781aafcc414eed9314ea3b7c47b0fc"
+      roomsCount:
+        type: "integer"
+        example: 2
+      guestsCount:
+        type: "integer"
+        example: 4
+      createdAt:
+        type: "string"
+        format: "date-time"
+      updatedAt:
+        type: "string"
+        format: "date-time"
+
+  bookingsCreateRequest:
+    type: "object"
+    required:
+      - "name"
+      - "authorEmail"
+      - "fromDate"
+      - "toDate"
+      - "hotelId"
+      - "roomsCount"
+      - "guestsCount"
+    properties:
+      name:
+        type: "string"
+        example: "Hotel test"
+      authorEmail:
+        type: "string"
+        example: "test@test.test"
+      fromDate:
+        type: "string"
+        format: "date-time"
+      toDate:
+        type: "string"
+        format: "date-time"
+      hotelId:
+        type: "string"
+        example: "here:pds:place:191srg0t-38781aafcc414eed9314ea3b7c47b0fc"
+      roomsCount:
+        type: "integer"
+        example: 2
+      guestsCount:
+        type: "integer"
+        example: 4
+
+  hotelsResponse:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+        example: "Beautiful House in the Heart of Munich"
+      id:
+        type: "string"
+        example: "here:pds:place:276u281z-4b4ea46dacca42719b3d9a5e03a3c5db"
+      ontologyId:
+        type: "string"
+        example: "here:cm:ontology:hotel"
+      resultType:
+        type: "string"
+        example: "place"
+      address:
+        type: "object"
+      position:
+        type: "object"
+      access:
+        type: array
+        items:
+          type: object
+      distance:
+        type: "integer"
+      categories:
+        type: array
+        items:
+          type: object
+      references:
+        type: array
+        items:
+          type: object
+      contacts:
+        type: array
+        items:
+          type: object
+      openingHours:
+        type: array
+        items:
+          type: object
+
+
+tags:
+  - name: bookings
+    description: ''
