@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "72ccdf40-2e0a-4641-aebd-1d204e6776b8",
+		"name": "limehome",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/v1/hotels",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://backend-api-env-2.eba-ha7kkdcx.eu-west-1.elasticbeanstalk.com/v1/hotels?coordinates=48.130323,11.576362&pageSize=2",
+					"protocol": "http",
+					"host": [
+						"backend-api-env-2",
+						"eba-ha7kkdcx",
+						"eu-west-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"v1",
+						"hotels"
+					],
+					"query": [
+						{
+							"key": "coordinates",
+							"value": "48.130323,11.576362"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/bookings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://backend-api-env-2.eba-ha7kkdcx.eu-west-1.elasticbeanstalk.com/v1/bookings?page=1&pageSize=6",
+					"protocol": "http",
+					"host": [
+						"backend-api-env-2",
+						"eba-ha7kkdcx",
+						"eu-west-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bookings"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "6"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/v1/bookings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"authorEmail\": \"test@test.test\",\n\t\"name\":\"hotel test\",\n    \"fromDate\": \"2021-02-01\",\n    \"toDate\": \"2021-02-28\",\n    \"hotelId\": \"here:pds:place:191srg0t-38781aafcc414eed9314ea3b7c47b0fc\",\n    \"roomsCount\": 2,\n    \"guestsCount\": 4\n}"
+				},
+				"url": {
+					"raw": "http://backend-api-env-2.eba-ha7kkdcx.eu-west-1.elasticbeanstalk.com/v1/bookings",
+					"protocol": "http",
+					"host": [
+						"backend-api-env-2",
+						"eba-ha7kkdcx",
+						"eu-west-1",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"v1",
+						"bookings"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
